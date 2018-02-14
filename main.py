@@ -1,9 +1,9 @@
-import requests
 import json
+from time import sleep
+import requests
 from settings import url
 from settings import crypto_api
-from time import sleep
-from pprint import pprint
+
 
 dictionary = json.load(open('dictionary.json'))
 
@@ -55,7 +55,7 @@ def main():
                 send_message(get_chat_id(get_last_update(url)), dictionary['help'])
             else:
                 send_message(get_chat_id(get_last_update(url)), dictionary['error'])
-            print(message_text + ' user: ' + get_chat_first_name(get_last_update(url)))
+            print('message: ' + message_text + ', user: ' + get_chat_first_name(get_last_update(url)))
             update_id += 1
         sleep(1)
 if __name__ == '__main__':
