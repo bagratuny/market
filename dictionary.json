@@ -1,5 +1,5 @@
 {
-    "start": ", hi! I'am a bot which show you current BTC and ETH prices in USD. For help: /help",
+    "start": ", hi! I'am a bot which shows you current BTC and ETH prices in USD. For help: /help",
     "btc": "Current BTC price in USD: ",
     "eth": "Current ETH price in USD: ",
     "error": "Incorrect command. /help",
