@@ -1,9 +1,7 @@
 import json
 from time import sleep
 import requests
-from settings import url
-from settings import crypto_api
-
+from api_links import url, crypto_api
 
 dictionary = json.load(open('dictionary.json'))
 
