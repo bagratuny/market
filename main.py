@@ -1,7 +1,10 @@
 import json
 from time import sleep
 import requests
-from api_links import url, crypto_api
+from api_links import API_LINKS
+
+bot_token = API_LINKS.get('bot_token')
+crypto_api = API_LINKS.get('crypto_api')
 
 dictionary = json.load(open('dictionary.json'))
 
@@ -17,7 +20,7 @@ def get_chat_id(chat_id):
 
 def send_message(chat_id, message_text):
     body = {'chat_id': chat_id, 'text': message_text}
-    response = requests.post(url + 'sendMessage', data=body)
+    response = requests.post(bot_token + 'sendMessage', data=body)
     return response
 
 def get_chat_first_name(chat_id):
@@ -39,21 +42,21 @@ def get_eth_price(eth):
     return response['ticker']['price']
 
 def main():
-    update_id = get_last_update(url)['update_id']
+    update_id = get_last_update(bot_token)['update_id']
     while True:
-        if update_id == get_last_update(url)['update_id']:
-            message_text = get_message_text(get_last_update(url))
+        if update_id == get_last_update(bot_token)['update_id']:
+            message_text = get_message_text(get_last_update(bot_token))
             if message_text == '/btc':
-                send_message(get_chat_id(get_last_update(url)), dictionary['btc'] +str(get_btc_price(crypto_api)))
+                send_message(get_chat_id(get_last_update(bot_token)), dictionary['btc'] +str(get_btc_price(crypto_api)))
             elif message_text == '/eth':
-                send_message(get_chat_id(get_last_update(url)), dictionary['eth'] +str(get_eth_price(crypto_api)))
+                send_message(get_chat_id(get_last_update(bot_token)), dictionary['eth'] +str(get_eth_price(crypto_api)))
             elif message_text == '/start':
-                send_message(get_chat_id(get_last_update(url)), get_chat_first_name(get_last_update(url)) + dictionary['start'])
+                send_message(get_chat_id(get_last_update(bot_token)), get_chat_first_name(get_last_update(bot_token)) + dictionary['start'])
             elif message_text == '/help':
-                send_message(get_chat_id(get_last_update(url)), dictionary['help'])
+                send_message(get_chat_id(get_last_update(bot_token)), dictionary['help'])
             else:
-                send_message(get_chat_id(get_last_update(url)), dictionary['error'])
-            print('message: ' + message_text + ', user: ' + get_chat_first_name(get_last_update(url)))
+                send_message(get_chat_id(get_last_update(bot_token)), dictionary['error'])
+            print('message: ' + message_text + ', user: ' + get_chat_first_name(get_last_update(bot_token)))
             update_id += 1
         sleep(1)
 if __name__ == '__main__':
