@@ -2,3 +2,4 @@ __pycache__
 .vscode
 api_links.py
 settings.pyc
+.DS_Store
