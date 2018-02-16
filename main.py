@@ -10,9 +10,9 @@ eth = COINS.get('eth')
 
 dictionary = json.load(open('dictionary.json'))
 
-def get_last_update(api_link):
+def get_last_update():
     params = {'timeout': 100, 'offset': [-1]}
-    parsed_data = requests.get(api_link + 'getUpdates', data = params)
+    parsed_data = requests.get(bot_token + 'getUpdates', data = params)
     response = parsed_data.json()
     return response['result'][-1]
 
@@ -27,10 +27,10 @@ def get_coin_price(coin):
     return response['ticker']['price']
 
 def main():
-    last_update = get_last_update(bot_token)
+    last_update = get_last_update()
     update_id = last_update['update_id']
     while True:
-        last_update = get_last_update(bot_token)
+        last_update = get_last_update()
         message_text = last_update['message']['text']
         chat_id = last_update['message']['chat']['id']
         first_name = last_update['message']['from']['first_name']
