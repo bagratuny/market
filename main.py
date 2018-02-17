@@ -5,8 +5,6 @@ from api_links import API_LINKS, COINS
 
 BOT_TOKEN = API_LINKS.get('bot_token')
 CRYPTONATOR_API = API_LINKS.get('cryptonator_api')
-BTC = COINS.get('btc')
-ETH = COINS.get('eth')
 DICT = json.load(open('dictionary.json'))
 
 def get_last_update(offset):
