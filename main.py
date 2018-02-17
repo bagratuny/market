@@ -30,7 +30,7 @@ def main():
                 chat_id = update['message']['chat']['id']
                 first_name = update['message']['from']['first_name']
                 if not get_coin_rate(message_text)['success']:
-                    coit_rate = 'False'
+                    coin_rate = None
                 else:
                     coin_rate = get_coin_rate(message_text)['ticker']['price']
                     coin_name = get_coin_rate(message_text)['ticker']['base']
@@ -38,7 +38,7 @@ def main():
                     send_message(chat_id, first_name + DICT['start'])
                 elif message_text == '/help':
                     send_message(chat_id, DICT['help'])
-                elif get_coin_rate(message_text) == None:
+                elif coin_rate == None:
                     send_message(chat_id, DICT['error'])
                 else:
                     send_message(chat_id, coin_name + ' rate is: $' + coin_rate)
