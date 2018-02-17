@@ -44,11 +44,10 @@ def main():
                     send_message(chat_id, first_name + DICT['start'])
                 elif message_text == '/help':
                     send_message(chat_id, DICT['help'])
+                elif get_coin_price(message_text) == None:
+                    send_message(chat_id, DICT['error'])
                 else:
-                    if get_coin_price(message_text) == None:
-                        send_message(chat_id, DICT['error'])
-                    else:
-                        send_message(chat_id, coin_name + ' rate is: $' + coin_price)
+                    send_message(chat_id, coin_name + ' rate is: $' + coin_price)
                 print('message: ' + message_text + ', user: ' + first_name)
             offset = len_updates[-1]['update_id'] + 1
         sleep(1)
