@@ -1,7 +1,5 @@
 {
-    "start": ", hi! I'am a bot which shows you current BTC and ETH prices in USD. For help: /help",
-    "btc": "Current BTC price in USD: ",
-    "eth": "Current ETH price in USD: ",
-    "error": "Incorrect command. /help",
-    "help": "To show BTC price, send /btc, to show ETH price, send /eth."
+    "start": ", hi! I'am a bot which shows you Cryptocurrency rate in USD. /help",
+    "error": "Undefined coin or incorrect command. /help",
+    "help": "Just type currency base code like this /btc or BTC"
 }

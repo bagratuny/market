@@ -4,50 +4,54 @@ import requests
 from api_links import API_LINKS, COINS
 
 BOT_TOKEN = API_LINKS.get('bot_token')
-COIN_API = API_LINKS.get('crypto_api')
+CRYPTONATOR_API = API_LINKS.get('cryptonator_api')
 BTC = COINS.get('btc')
 ETH = COINS.get('eth')
+DICT = json.load(open('dictionary.json'))
 
-dictionary = json.load(open('dictionary.json'))
-
-def get_last_update(huy):
-    params = {'timeout': 100, 'offset': huy}
-    parsed_data = requests.get(BOT_TOKEN + 'getUpdates', data = params)
-    response = parsed_data.json()
-    return response['result']
+def get_last_update(offset):
+    params = {'timeout': 100, 'offset': offset}
+    response = requests.get(BOT_TOKEN + 'getUpdates', data=params)
+    return response.json()['result']
 
 def send_message(chat_id, message_text):
     body = {'chat_id': chat_id, 'text': message_text}
-    response = requests.post(BOT_TOKEN + 'sendMessage', data=body)
-    return response
+    requests.post(BOT_TOKEN + 'sendMessage', data=body)
 
 def get_coin_price(coin):
-    parsed_data = requests.get(COIN_API + coin + '-usd/')
-    response = parsed_data.json()
-    response2 = response['ticker']['price']
-    return str(response2)
+    boolean_test = requests.get(CRYPTONATOR_API + coin + '-usd/')
+    if boolean_test.json()['success'] == True:
+        response = boolean_test.json()
+    else:
+        response = None
+    return response
 
 def main():
     offset = 0
     while True:
         len_updates = get_last_update(offset)
         if len(len_updates) > 0:
-            for count in len_updates:
-                message_text = count['message']['text']
-                chat_id = count['message']['chat']['id']
-                first_name = count['message']['from']['first_name']
+            for update in len_updates:
+                message_text = update['message']['text']
+                chat_id = update['message']['chat']['id']
+                first_name = update['message']['from']['first_name']
+                if not get_coin_price(message_text):
+                    coin_price = 'False'
+                else: 
+                    coin_price = get_coin_price(message_text)['ticker']['price']
+                    coin_name = get_coin_price(message_text)['ticker']['base']
                 if message_text == '/start':
-                    send_message(chat_id, first_name + dictionary['start'])
+                    send_message(chat_id, first_name + DICT['start'])
                 elif message_text == '/help':
-                    send_message(chat_id, dictionary['help'])
-                elif message_text == '/btc':
-                    send_message(chat_id, dictionary['btc'] +str(get_coin_price(BTC)))
-                elif message_text == '/eth':
-                    send_message(chat_id, dictionary['eth'] +str(get_coin_price(ETH)))
+                    send_message(chat_id, DICT['help'])
                 else:
-                    send_message(chat_id, dictionary['error'])
+                    if get_coin_price(message_text) == None:
+                        send_message(chat_id, DICT['error'])
+                    else:
+                        send_message(chat_id, coin_name + ' rate is: $' + coin_price)
                 print('message: ' + message_text + ', user: ' + first_name)
             offset = len_updates[-1]['update_id'] + 1
-        sleep(5)
+        sleep(1)
+
 if __name__ == '__main__':
     main()
