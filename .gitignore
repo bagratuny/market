@@ -3,6 +3,5 @@ __pycache__
 api_links.py
 settings.pyc
 .DS_Store
-db.py
-helper.py
-update_id.db
+api_links.pyc
+dictionary.pyc
