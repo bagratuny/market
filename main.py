@@ -41,7 +41,6 @@ def handle_message(message_text, chat_id, first_name):
 def main():
     offset = 0
     while True:
-        print(offset)
         updates = get_last_update(offset)
         for update in updates:
             if 'message' in update and 'text' in update['message']:
