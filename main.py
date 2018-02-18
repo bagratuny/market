@@ -17,8 +17,12 @@ def send_message(chat_id, message_text):
     requests.post(BOT_TOKEN + 'sendMessage', data=body)
 
 def get_coin_rate(coin):
-    response = requests.get(CRYPTONATOR_API + coin + '-usd/')
-    return response.json()
+    test = requests.get(CRYPTONATOR_API + coin + '-usd/')
+    try:
+        response = test.json()
+    except:
+        response = {'success': False}
+    return response
 
 def main():
     offset = 0
