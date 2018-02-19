@@ -23,17 +23,15 @@ def get_coin_rate(coin):
         return {'success': False}
 
 def handle_message(message_text, chat_id, first_name):
-    print('message: ' + message_text + ', user: ' + first_name)
     if message_text == '/start':
         send_message(chat_id, first_name + DICT.get('start'))
     elif message_text == '/help':
         send_message(chat_id, DICT.get('help'))
     else:
-        success = get_coin_rate(message_text)['success']
-        if success:
-            print(message_text)
-            coin_base = get_coin_rate(message_text)['ticker']['base']
-            coin_price = get_coin_rate(message_text)['ticker']['price']
+        success = get_coin_rate(message_text)
+        if success['success']:
+            coin_base = success['ticker']['base']
+            coin_price = success['ticker']['price']
             send_message(chat_id, '{} rate is: ${}'.format(coin_base, coin_price))
         else:
             send_message(chat_id, DICT.get('error'))
@@ -47,6 +45,7 @@ def main():
                 chat_id = update['message']['chat']['id']
                 first_name = update['message']['from']['first_name']
                 message_text = update['message']['text']
+                print('message: ' + message_text + ', user: ' + first_name)
                 handle_message(message_text, chat_id, first_name)
             else:
                 send_message(chat_id, DICT.get('error'))
