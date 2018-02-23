@@ -1,0 +1,11 @@
+env
+.DS_Store
+.vscode/
+django_site/pics/
+django_site/products/__pycache__/
+django_site/products/migrations/
+django_site/products/__init__.py 
+django_site/products/tests.py 
+django_site/django_site/__pycache__/
+django_site/django_site/__init__.py
+django_site/django_site/wsgi.py
