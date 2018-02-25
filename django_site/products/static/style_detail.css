@@ -1,31 +1,47 @@
-@keyframes bounce {
-40% {
-    -webkit-transform: translateY(-20px);
-    transform: translateY(-20px);
- }
-}
-@font-face {
+/* @font-face {
     font-family: Lobster;
     src: url(3952.ttf);
-}
+} */
 .h1 {
     font-size: 12px;
 }
 .price {
-    background: #FF5733;
+    border-color: #C9C9C9;
+    border-width: 1px;
+    border-style: solid;
     border-radius: 5px;
     width: min-content;
+    margin: 0px;
     margin-left: auto;
     margin-right: 0%;
-    bottom: 10px;
+    float: right;
+}
+.buy {
+    /* border-color: #C9C9C9;
+    border-width: 1px;
+    border-style: solid; */
+    background-color: #0e233f;
+    border-radius: 5px;
+    width: min-content;
+    margin: 0px;
+    margin-left: 10px;
+    float: right;
 }
 .price_p {
     padding: 5px;
-    margin: 0px;
-    color: white;
-    font-family:  Roboto, 'Open Sans';
-    font-weight: bolder;
-    margin-top: 5px;
+    margin: 1px;
+    color: rgb(122, 122, 122);
+    font-family: 'Open Sans';
+    font-weight: normal;
+    font-size: 12px;
+}
+.buy_p {
+    padding: 6px;
+    margin: 1px;
+    color: rgb(255, 255, 255);
+    font-family: 'Open Sans';
+    font-weight: bold;
+    font-size: 12px;
 }
 .block {
     float: left;
@@ -47,10 +63,7 @@
     font-family: Lobster, arial, serif;
     font-size: 30pt;
     font-weight: bolder;
-    background: linear-gradient(180deg, #7b4397, #dc2430);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #405870;
     margin: 20px;
 }
 .text {
@@ -81,4 +94,14 @@
     margin: 1px; 
     width: max-content;
     float: left;
+    color: rgb(65, 65, 65);
+}
+.img {
+    border-color: #C9C9C9;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    width: min-content;
+    padding: 1px;
+    margin-top: 15px;
 }

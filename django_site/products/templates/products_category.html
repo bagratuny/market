@@ -10,8 +10,7 @@
 <div class="index">
     <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><p class="title">iStore</p></a>
     <p class="category">{{category.title}}</p>
-{% load staticfiles %}
-{%for product in category.products.all%}
+    {%for product in category.products.all%}
     <div class="block">
         <p class="text"><a href="/product/{{product.slug}}" class="link">{{product.title}}</a></p>
         <p class="text" style="font-size: 10px; color: #A2A2A2"><a href="/category/{{ product.category.slug }}" class="link">{{product.category}}</a></p>
@@ -19,11 +18,15 @@
         <div class=img>
             <img src="{{product.image.url}}" height="100px">
         </div>
+        <div class="buy">
+                <p class="buy_p">Buy</p>
+        </div>
         <div class="price">
             <p class="price_p">{{product.price}}</p>
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
 </body>
 </html>

@@ -14,7 +14,6 @@ class Product(models.Model):
 
 class Category(models.Model): 
     title = models.CharField(max_length=200)
-    description = models.TextField(max_length=5000, blank=True)
     slug = models.SlugField(max_length=50, default=None)
 
     def __str__(self):

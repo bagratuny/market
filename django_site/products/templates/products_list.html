@@ -8,21 +8,50 @@
 </head>
 <body>
     <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><p class="title">iStore</p></a>
-{% load staticfiles %}
-{% for product in products %}
 <div class="index">
-    <div class="block">
-        <p class="text"><a href="/product/{{product.slug}}" class="link">{{product.title}}</a></p>
-        <p class="text" style="font-size: 10px; color: #A2A2A2"><a href="/category/{{ product.category.slug }}" class="link">{{product.category}}</a></p>
-        <p class="description">{{product.description}}</p>
-        <div class=img>
-            <img src="{{product.image.url}}" height="100px">
-        </div>
-        <div class="price">
-            <p class="price_p">{{product.price}}</p>
-        </div>
+    <div class="products">
+        {% load staticfiles %}
+        {% for product in products %}
+            <div class="block">
+                <p class="text"><a href="/product/{{product.slug}}" class="link">{{product.title}}</a></p>
+                <p class="text" style="font-size: 10px; color: #A2A2A2"><a href="/category/{{ product.category.slug }}" class="link">{{product.category}}</a></p>
+                <p class="description">{{product.description}}</p>
+                <div class=img>
+                    <img src="{{product.image.url}}" height="100px">
+                </div>
+                <div class="buy">
+                        <p class="buy_p">Buy</p>
+                </div>
+                <div class="price">
+                    <p class="price_p">{{product.price}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="categorys_list">
+        {% for title in categorys %}
+        <a href="/category/{{title.slug}}" class="categorys_link"><p class="categorys_title">{{title.title}}</p></a>
+        {% endfor %}
     </div>
 </div>
-{% endfor %}
+<div class="pagination">
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="page">←</a>
+    {% else %}
+    {% endif %}
+    {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+            <p class="page">{{ i }} </p>
+        {% else %}
+        <a href="?page={{ i }}" class="page">{{ i }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="page">→</a>
+    {% else %}
+    {% endif %}
+{% endif %}
+</div>
 </body>
 </html>
