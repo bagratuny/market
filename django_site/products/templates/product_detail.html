@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>iStore</title>
+    <link rel="stylesheet" type="text/css" href="{% static "/style_detail.css"%}">
+</head>
+<body>
+    <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><p class="title">iStore</p></a>
+    <div style="width: 40%; margin-left: auto; margin-right: auto;">
+        <a href="/category/{{ product.category.slug }}" class="link">{{product.category}}</a><br>
+        <p class="name">{{product.title}}</p>
+        <div class="price" style="text-align: right;">
+            <p class="price_p">{{product.price}}</p>
+        </div>
+        <p class="img"><img src="{{product.image.url}}" style="height: 250px;"></p>
+        <p class="description">{{product.description}}</p>
+    </div>
+</body>
+</html>

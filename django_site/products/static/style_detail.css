@@ -1,0 +1,107 @@
+/* @font-face {
+    font-family: Lobster;
+    src: url(3952.ttf);
+} */
+.h1 {
+    font-size: 12px;
+}
+.price {
+    border-color: #C9C9C9;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    width: min-content;
+    margin: 0px;
+    margin-left: auto;
+    margin-right: 0%;
+    float: right;
+}
+.buy {
+    /* border-color: #C9C9C9;
+    border-width: 1px;
+    border-style: solid; */
+    background-color: #0e233f;
+    border-radius: 5px;
+    width: min-content;
+    margin: 0px;
+    margin-left: 10px;
+    float: right;
+}
+.price_p {
+    padding: 5px;
+    margin: 1px;
+    color: rgb(122, 122, 122);
+    font-family: 'Open Sans';
+    font-weight: normal;
+    font-size: 12px;
+}
+.buy_p {
+    padding: 6px;
+    margin: 1px;
+    color: rgb(255, 255, 255);
+    font-family: 'Open Sans';
+    font-weight: bold;
+    font-size: 12px;
+}
+.block {
+    float: left;
+    width: 200px;
+    height: min-content;
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.164);
+}
+.index {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.title {
+    text-align: center;
+    font-family: Lobster, arial, serif;
+    font-size: 30pt;
+    font-weight: bolder;
+    color: #405870;
+    margin: 20px;
+}
+.text {
+    font-family:  Roboto, 'Open Sans';
+    font-weight: bold;
+    margin: 1px;
+}
+.description {
+    font-family:  Roboto, 'Open Sans'; 
+    font-weight: lighter;
+    font-size: 20px;
+    margin: 0px;
+}
+.link {
+    color: #4B4B4B;
+    text-decoration: none;
+    font-family:  Roboto, 'Open Sans'; 
+    font-size: 15px;
+}
+.link:visited {
+    color: #4B4B4B;
+    text-decoration: none;
+}
+.name{
+    font-family:  Roboto, 'Open Sans'; 
+    font-weight: bold; 
+    font-size: 30px; 
+    margin: 1px; 
+    width: max-content;
+    float: left;
+    color: rgb(65, 65, 65);
+}
+.img {
+    border-color: #C9C9C9;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    width: min-content;
+    padding: 1px;
+    margin-top: 15px;
+}
