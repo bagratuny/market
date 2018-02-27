@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -7,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="{% static "/style.css"%}">
 </head>
 <body>
-{% load static %}
 <div class="index">
     <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><p class="title">iStore</p></a>
     <p class="category">{{category.title}}</p>
