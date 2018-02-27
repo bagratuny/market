@@ -9,9 +9,3 @@ django_site/products/tests.py
 django_site/django_site/__pycache__/
 django_site/django_site/__init__.py
 django_site/django_site/wsgi.py
-__pycache__
-.vscode
-settings.pyc
-.DS_Store
-api_links.pyc
-dictionary.pyc
