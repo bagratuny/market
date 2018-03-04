@@ -8,20 +8,20 @@
     <link rel="stylesheet" type="text/css" href="{% static "/style.css"%}">
 </head>
 <body>
-    <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><p class="title">iStore</p></a>
+    <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><span class="title">iStore</span></a>
 <div class="index">
     <div class="products">
         {% load staticfiles %}
         {% for product in products %}
             <div class="block">
-                <p class="text"><a href="/product/{{product.slug}}" class="link">{{product.title}}</a></p>
+                <p class="text"><a href="{% url 'detail' product.slug %}" class="link">{{product.title}}</a></p>
                 <p class="text" style="font-size: 10px; color: #A2A2A2"><a href="/category/{{ product.category.slug }}" class="link">{{product.category}}</a></p>
                 <p class="description">{{product.description}}</p>
                 <div class=img>
                     <img src="{{product.image.url}}" height="100px">
                 </div>
                 <div class="buy">
-                        <p class="buy_p">Buy</p>
+                    <a href="{% url 'product_order' product.slug %}" style="text-decoration: none"><p class="buy_p">Buy</p></a>
                 </div>
                 <div class="price">
                     <p class="price_p">{{product.price}}</p>
@@ -29,7 +29,13 @@
             </div>
         {% endfor %}
     </div>
-    <div class="categorys_list">
+    <div class="button"><a href="/product/create" style="text-decoration: none;"><span class="price_p">Create</span></a></div>
+    {% if user.is_authenticated %}
+    <div class="button"><a href="{% url 'logout' %}" style="text-decoration: none;"><span class="price_p">!{{ user.username }}! Logout</span></a></div>
+    {% else %}
+        <div class="button"><a href="{% url 'login' %}" style="text-decoration: none;"><span class="price_p">Log in</span></a></div>
+    {% endif %}
+        <div class="categorys_list">
         {% for title in categorys %}
         <a href="/category/{{title.slug}}" class="categorys_link"><p class="categorys_title">{{title.title}}</p></a>
         {% endfor %}

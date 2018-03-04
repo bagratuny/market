@@ -57,12 +57,13 @@
     margin-right: auto;
 }
 .title {
-    text-align: center;
+    margin-left: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-family: Lobster, arial, serif;
     font-size: 30pt;
     font-weight: bolder;
     color: #405870;
-    margin: 20px;
 }
 .text {
     font-family:  Roboto, 'Open Sans';
@@ -141,4 +142,13 @@
 .products{
     float: left;
     width: 730px;
+}
+.button{
+    margin-left: 20px; 
+    border-color: #C9C9C9; 
+    border-width: 1px; 
+    border-style: solid; 
+    border-radius: 5px; 
+    padding:  1px; 
+    display: inline;
 }
