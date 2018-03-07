@@ -32,3 +32,9 @@ class Order(models.Model):
     customer_name = models.CharField(max_length=50)
     customer_phone_number = models.CharField(max_length=15)
     user = models.ForeignKey(User, on_delete="CASCADE", blank=True, null=True)
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete="CASCADE", blank=False, null=False)
+    user = models.ForeignKey(User, on_delete="CASCADE", blank=True, null=True)
+    content = models.TextField(max_length=5000)
+    created_date = models.DateTimeField(auto_now_add=True)

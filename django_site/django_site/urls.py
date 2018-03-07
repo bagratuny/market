@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from products import views 
 from django.urls import path, include
+from django.views.decorators.http import require_POST
 
 urlpatterns = [ 
     path('', views.IndexView.as_view(), name='index'), 
