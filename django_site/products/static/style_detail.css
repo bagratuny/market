@@ -1,10 +1,3 @@
-/* @font-face {
-    font-family: Lobster;
-    src: url(3952.ttf);
-} */
-.h1 {
-    font-size: 12px;
-}
 .price {
     border-color: #C9C9C9;
     border-width: 1px;
@@ -16,17 +9,6 @@
     margin-right: 0%;
     float: right;
 }
-.buy {
-    /* border-color: #C9C9C9;
-    border-width: 1px;
-    border-style: solid; */
-    background-color: #0e233f;
-    border-radius: 5px;
-    width: min-content;
-    margin: 0px;
-    margin-left: 10px;
-    float: right;
-}
 .price_p {
     padding: 5px;
     margin: 1px;
@@ -34,29 +16,6 @@
     font-family: 'Open Sans';
     font-weight: normal;
     font-size: 12px;
-}
-.buy_p {
-    padding: 6px;
-    margin: 1px;
-    color: rgb(255, 255, 255);
-    font-family: 'Open Sans';
-    font-weight: bold;
-    font-size: 12px;
-}
-.block {
-    float: left;
-    width: 200px;
-    height: min-content;
-    position: relative;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px;
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.164);
-}
-.index {
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
 }
 .title {
     text-align: center;
@@ -103,5 +62,11 @@
     border-radius: 5px;
     width: min-content;
     padding: 1px;
-    margin-top: 15px;
+    margin-top: 50px;
+}
+.add {
+    color: #4B4B4B;
+    text-decoration: none;
+    font-family:  Roboto, 'Open Sans'; 
+    font-size: 15px;
 }

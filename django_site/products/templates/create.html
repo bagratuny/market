@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta charset="utf-8">
+    <title>iStore</title>
+    <link rel="stylesheet" type="text/css" href="{% static "/style_detail.css"%}">
+</head>
+<body>
+    <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><p class="title">iStore</p></a>
+    <div style="width: 50%; margin-left: auto; margin-right: auto;">
+        <span class="link" style="font-size: 25px">Add a new product</span>
+        <div class="add">
+            <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %} 
+            {{ form.as_p }} 
+            <input type="submit" value="Подтвердить" /> 
+            </form>
+        </div>
+    </div>
+</body>
+</html>

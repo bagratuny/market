@@ -1,26 +1,227 @@
 {% load static %}
-<!DOCTYPE HTML>
 <html>
 <head>
+    <title>iShop</title>
+    <link rel="stylesheet" type="text/css" href="{% static "/bootstrap.css" %}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">iShop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="category.html">Categories <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="product.html">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a class="btn btn-success btn-sm ml-3" href="cart.html">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span class="badge badge-light">3</span>
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">iShop</h1>
+        <p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte...</p>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-3">
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>   Categories</div>
+                <ul class="list-group category_block">
+                    {% for category in categorys %}
+                    <li class="list-group-item"><a href="/category/{{category.slug}}">{{category.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-success text-white text-uppercase">Last product</div>
+                <div class="card-body">
+                    <img class="img-fluid" src="https://dummyimage.com/600x400/55595c/fff" />
+                    <h5 class="card-title">Product title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="bloc_left_price">99.00 $</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap" style="max-height: 200px; max-width: 200px; margin-left: auto; margin-right: auto;">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="/product/{{product.slug}}" title="View Product">{{ product.title }}</a></h4>
+                            <p class="card-text">{{ product.description }}</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">{{ product.price }}</p>
+                                </div>
+                                <div class="col">
+                                    <a href="{% url 'product_order' product.slug %}" class="btn btn-success btn-block">Order</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if is_paginated %}
+                <div class="col-12">
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                                </li>
+                                {% endif %}
+                                {% for i in paginator.page_range %}
+                                    {% if page_obj.number == i %}
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">{{ i }}<span class="sr-only">(current)</span></a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-lg-4 col-xl-3">
+                <h5>About</h5>
+                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                <p class="mb-0">
+                    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+                </p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+                <h5>Informations</h5>
+                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                <ul class="list-unstyled">
+                    <li><a href="">Link 1</a></li>
+                    <li><a href="">Link 2</a></li>
+                    <li><a href="">Link 3</a></li>
+                    <li><a href="">Link 4</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+                <h5>Others links</h5>
+                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                <ul class="list-unstyled">
+                    <li><a href="">Link 1</a></li>
+                    <li><a href="">Link 2</a></li>
+                    <li><a href="">Link 3</a></li>
+                    <li><a href="">Link 4</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3">
+                <h5>Contact</h5>
+                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-home mr-2"></i> My company</li>
+                    <li><i class="fa fa-envelope mr-2"></i> email@example.com</li>
+                    <li><i class="fa fa-phone mr-2"></i> + 33 12 14 15 16</li>
+                    <li><i class="fa fa-print mr-2"></i> + 33 12 14 15 16</li>
+                </ul>
+            </div>
+            <div class="col-12 copyright mt-3">
+                <p class="float-left">
+                    <a href="#">Back to top</a>
+                </p>
+                <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a href="https://t-php.fr/43-theme-ecommerce-bootstrap-4.html"><i>t-php</i></a> | <span>v. 1.0</span></p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+<!-- <!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache">
     <meta charset="utf-8">
     <title>iStore</title>
     <link rel="stylesheet" type="text/css" href="{% static "/style.css"%}">
 </head>
 <body>
-    <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><p class="title">iStore</p></a>
+    <a href="http://127.0.0.1:8000/" style="text-decoration: none;"><span class="title">iStore</span></a>
 <div class="index">
     <div class="products">
         {% load staticfiles %}
         {% for product in products %}
             <div class="block">
-                <p class="text"><a href="/product/{{product.slug}}" class="link">{{product.title}}</a></p>
+                <p class="text"><a href="{% url 'detail' product.slug %}" class="link">{{product.title}}</a></p>
                 <p class="text" style="font-size: 10px; color: #A2A2A2"><a href="/category/{{ product.category.slug }}" class="link">{{product.category}}</a></p>
                 <p class="description">{{product.description}}</p>
                 <div class=img>
                     <img src="{{product.image.url}}" height="100px">
                 </div>
                 <div class="buy">
-                        <p class="buy_p">Buy</p>
+                    <a href="{% url 'product_order' product.slug %}" style="text-decoration: none"><p class="buy_p">Buy</p></a>
                 </div>
                 <div class="price">
                     <p class="price_p">{{product.price}}</p>
@@ -28,7 +229,13 @@
             </div>
         {% endfor %}
     </div>
-    <div class="categorys_list">
+    <div class="button"><a href="/product/create" style="text-decoration: none;"><span class="price_p">Create</span></a></div>
+    {% if user.is_authenticated %}
+    <div class="button"><a href="{% url 'logout' %}" style="text-decoration: none;"><span class="price_p">!{{ user.username }}! Logout</span></a></div>
+    {% else %}
+        <div class="button"><a href="{% url 'login' %}" style="text-decoration: none;"><span class="price_p">Log in</span></a></div>
+    {% endif %}
+        <div class="categorys_list">
         {% for title in categorys %}
         <a href="/category/{{title.slug}}" class="categorys_link"><p class="categorys_title">{{title.title}}</p></a>
         {% endfor %}
@@ -54,4 +261,4 @@
 {% endif %}
 </div>
 </body>
-</html>
+</html> -->
