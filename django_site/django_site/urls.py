@@ -15,6 +15,7 @@ urlpatterns = [
     path('product/<slug:slug>/order', views.Order.as_view(), name='product_order'),
     path('signup', views.Signup.as_view(), name='signup'),
     path('login', include('django.contrib.auth.urls')),
+    path('api/products/', views.ProductListAPI.as_view(), name='api_products_list'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

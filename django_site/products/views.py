@@ -6,7 +6,10 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.views.generic.edit import FormMixin
 from django import forms
+from rest_framework import generics, permissions
+from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 import requests
+from .serializers import ProductSerializer
 from .models import Product
 from .models import Category
 from .models import Order
@@ -23,6 +26,7 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categorys'] = Category.objects.all()
+        context['last_product'] = Product.objects.latest('id')
         return context
 
 class ReviewForm(forms.ModelForm):
@@ -104,3 +108,9 @@ class Signup(generic.CreateView):
     form_class = UserCreationForm
     template_name = 'signup.html'
     success_url = reverse_lazy('login')
+
+class ProductListAPI(generics.ListCreateAPIView):
+    renderer_classes = (JSONRenderer, )
+    permission_classes = (permissions.IsAdminUser, )
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer

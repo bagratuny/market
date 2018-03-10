@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'djmoney',
     'products.apps.ProductsConfig',
     'django.contrib.admin',
@@ -127,3 +128,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'pics')
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+import django_heroku
+django_heroku.settings(locals())
